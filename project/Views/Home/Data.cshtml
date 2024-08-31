@@ -1,0 +1,38 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Data";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Avaliable views:</h1>
+</div>
+
+
+<li>
+    <a href="@Url.Action("Index", "Movies")" class="elements">
+        <span>Movies</span>
+    </a>
+</li>
+<li>
+    <a href="@Url.Action("Index", "MovieGenres")" class="elements">
+        <span>MovieGenres</span>
+    </a>
+</li>
+<li>
+    <a href="@Url.Action("Index", "MovieUsers")" class="elements">
+        <span>Users</span>
+    </a>
+</li>
+<li>
+    <a href="@Url.Action("Index", "Ratings")" class="elements">
+        <span>Ratings</span>
+    </a>
+</li>
+<li>
+    <a href="@Url.Action("Index", "Tags")" class="elements">
+        <span>Tags</span>
+    </a>
+</li>

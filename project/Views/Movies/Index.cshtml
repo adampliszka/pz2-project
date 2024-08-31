@@ -1,0 +1,151 @@
+﻿@model IEnumerable<project.Models.Movie>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
+@{
+    var p = (int?)@ViewData["Page"] >= 2 ? (int?)@ViewData["Page"] - 1 : 1;
+}
+@{
+    var n = (int?)@ViewData["Page"] + 1;
+}
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["sortOrder"]"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   asp-route-page="@p"
+   class="btn btn-default">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["sortOrder"]"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   asp-route-page="@n"
+   class="btn btn-default">
+    Next
+</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["TitleSortParam"]">@Html.DisplayNameFor(model => model.title)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["YearSortParam"]">@Html.DisplayNameFor(model => model.year)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["GenreSortParam"]">@Html.DisplayNameFor(model => model.genres)</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NoRatingsSortParam"]">@Html.DisplayName("Nº ratings")</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["AvgRatingSortParam"]">@Html.DisplayName("average rating")</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["MedianRatingSortParam"]">@Html.DisplayName("median rating")</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["RatingModeSortParam"]">@Html.DisplayName("mode of ratings")</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NewestRatingSortParam"]">@Html.DisplayName("newest rating")</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["OldestRatingSortParam"]">@Html.DisplayName("oldest rating")</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NoTagsSortParam"]">@Html.DisplayName("Nº tags")</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["TagModeTagSortParam"]">@Html.DisplayName("mode of tags")</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NewestTagSortParam"]">@Html.DisplayName("newest tag")</a>
+            </th>
+            <th>
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["OldestTagSortParam"]">@Html.DisplayName("oldest tag")</a>
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.year)
+            </td>
+            <td>
+                @Html.DisplayFor(modelitem => item.genreString)
+            </td>
+            <td>
+                @{var nr = item.ratings.Count();}
+                @Html.DisplayFor(modelItem => nr)
+            </td>
+            <td>
+                @{var avg = (decimal?) item.avgRating;}
+                @Html.DisplayFor(modelItem => avg)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.medianRating)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ratingMode)
+            </td>
+            <td>
+                @{var newest = item.ratings.Max(r => r.date);}
+                @Html.DisplayFor(modelItem => newest)
+            </td>
+            <td>
+                @{var oldest = item.ratings.Min(r => r.date);}
+                @Html.DisplayFor(modelItem => oldest)
+            </td>
+            <td>
+                @{var nt = item.tags.Count();}
+                @Html.DisplayFor(modelItem => nt)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tagMode)
+            </td>
+            <td>
+                @{var nwt = item.tags.Max(t => t.date);}
+                @Html.DisplayFor(modelItem => nwt)
+            </td>
+            <td>
+                @{var ot = item.tags.Min(t => t.date);}
+                @Html.DisplayFor(modelItem => ot)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["sortOrder"]"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   asp-route-page="@p"
+   class="btn btn-default">
+    Previous
+</a>
+<a asp-action="Index"
+   asp-route-sortOrder="@ViewData["sortOrder"]"
+   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+   asp-route-page="@n"
+   class="btn btn-default">
+    Next
+</a>

@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using project.Data;
 using project.Models;
+using System.Drawing;
+using Microsoft.IdentityModel.Tokens;
 
 namespace project.Controllers
 {
@@ -17,7 +19,7 @@ namespace project.Controllers
         private readonly ApplicationDbContext _context;
 
         [Flags]
-        public enum Columns
+        public enum Columns //for when filtering columns/sorting via multiple is needed - not implemented
         {
             Title = 0b_0000_0000_0000,
             Year = 0b_0000_0000_0001,
@@ -71,22 +73,22 @@ namespace project.Controllers
                 .Include(m => m.genres)
                 .Include(m => m.ratings)
                 .Include(m => m.tags)
-            .AsQueryable();
+                .AsSplitQuery();
 
             switch (sortOrder)
             {
 
                 case "year":
-                    movies = movies.OrderBy(s => s.year);
+                    movies = movies.OrderBy(s => s.year == null ? 1 : 0).ThenBy(s => s.year);
                     break;
                 case "year_desc":
-                    movies = movies.OrderByDescending(s => s.year);
+                    movies = movies.OrderBy(s => s.year == null ? 1 : 0).ThenByDescending(s => s.year);
                     break;
                 case "genre":
-                    movies = movies.OrderBy(s => s.genres.FirstOrDefault().genre);
+                    movies = movies.OrderBy(s => (s.genreString == "(no genres listed)" || s.genreString == "") ? 1 : 0).ThenBy(s => s.genres.FirstOrDefault().genre);
                     break;
                 case "genre_desc":
-                    movies = movies.OrderByDescending(s => s.genres.FirstOrDefault().genre);
+                    movies = movies.OrderBy(s => (s.genreString == "(no genres listed)" || s.genreString == "") ? 1 : 0).ThenByDescending(s => s.genres.FirstOrDefault().genre);
                     break;
                 case "medianRating":
                     movies = movies.OrderBy(s => s.medianRating == null ? 1:0).ThenBy(s => s.medianRating);
@@ -120,16 +122,16 @@ namespace project.Controllers
                     //movies = movies.OrderByDescending(s => s.ratings.GroupBy(r => r.rating_value).OrderByDescending(g => g.Count()).FirstOrDefault().FirstOrDefault().rating_value);
                     break;
                 case "newestRating":
-                    movies = movies.OrderBy(s => s.ratings.Max(r => r.date));
+                    movies = movies.OrderBy(s => !s.ratings.Any() ? 1 : 0).ThenBy(s => s.ratings.Max(r => r.date));
                     break;
                 case "newestRating_desc":
-                    movies = movies.OrderByDescending(s => s.ratings.Max(r => r.date));
+                    movies = movies.OrderBy(s => !s.ratings.Any() ? 1 : 0).ThenByDescending(s => s.ratings.Max(r => r.date));
                     break;
                 case "oldestRating":
-                    movies = movies.OrderBy(s => s.ratings.Min(r => r.date));
+                    movies = movies.OrderBy(s => !s.ratings.Any() ? 1 : 0).ThenBy(s => s.ratings.Min(r => r.date));
                     break;
                 case "oldestRating_desc":
-                    movies = movies.OrderByDescending(s => s.ratings.Min(r => r.date));
+                    movies = movies.OrderBy(s => !s.ratings.Any() ? 1 : 0).ThenByDescending(s => s.ratings.Min(r => r.date));
                     break;
                 case "noTags":
                     movies = movies.OrderBy(s => s.tags.Count());
@@ -146,16 +148,16 @@ namespace project.Controllers
                     //movies = movies.OrderByDescending(s => s.tags.GroupBy(t => t.tag_value).OrderByDescending(g => g.Count()).FirstOrDefault().FirstOrDefault().tag_value);
                     break;
                 case "newestTag":
-                    movies = movies.OrderBy(s => s.tags.Max(t => t.date));
+                    movies = movies.OrderBy(s => !s.tags.Any() ? 1 : 0).ThenBy(s => s.tags.Max(t => t.date));
                     break;
                 case "newestTag_desc":
-                    movies = movies.OrderByDescending(s => s.tags.Max(t => t.date));
+                    movies = movies.OrderBy(s => !s.tags.Any() ? 1 : 0).ThenByDescending(s => s.tags.Max(t => t.date));
                     break;
                 case "oldestTag":
-                    movies = movies.OrderBy(s => s.tags.Min(t => t.date));
+                    movies = movies.OrderBy(s => !s.tags.Any() ? 1 : 0).ThenBy(s => s.tags.Min(t => t.date));
                     break;
                 case "oldestTag_desc":
-                    movies = movies.OrderByDescending(s => s.tags.Min(t => t.date));
+                    movies = movies.OrderBy(s => !s.tags.Any() ? 1 : 0).ThenByDescending(s => s.tags.Min(t => t.date));
                     break;
                 case "title_desc":
                     movies = movies.OrderByDescending(s => s.title);
@@ -164,7 +166,25 @@ namespace project.Controllers
                     movies = movies.OrderBy(s => s.title);
                     break;
             }
+            
+            ViewData["TotalPages"] = (int)Math.Ceiling(await movies.CountAsync() / 50.0);
+            if (page > (int)ViewData["TotalPages"])
+            {
+                page = (int)ViewData["TotalPages"];
+            }
+            else if (page < 1)
+            {
+                page = 1;
+            }
             ViewData["page"] = page;
+
+
+            /*Graphics graphics = Graphics.FromHwnd(IntPtr.Zero);
+
+            SizeF stringSize = graphics.MeasureString("of "+ ViewData["TotalPages"], new Font("Segoe UI", 1));
+            ViewData["spaceNeeded"] = Math.Abs(stringSize.Width).ToString()+"rem";
+            //graphics.ReleaseHdc();*/
+
             return View(await movies.Skip((page-1)*50).Take(50).AsNoTracking().ToListAsync());
             
 
@@ -178,7 +198,7 @@ namespace project.Controllers
                 return NotFound();
             }
 
-            var movie = await _context.Movies
+            var movie = await _context.Movies.Include(m => m.ratings)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (movie == null)
             {

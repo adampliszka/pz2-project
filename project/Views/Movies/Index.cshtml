@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<project.Models.Movie>
 
+
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -11,29 +12,50 @@
     <a asp-action="Create">Create New</a>
 </p>
 
+
+
+
 @{
-    var p = (int?)@ViewData["Page"] >= 2 ? (int?)@ViewData["Page"] - 1 : 1;
+    var totalPages = (int?)ViewData["TotalPages"];
+    var currentPage = (int?)ViewData["Page"];
+    var prevPage = currentPage >= 2 ? currentPage - 1 : 1;
+    var nextPage = currentPage + 1;
+    var isFirstPage = currentPage == 1;
+    var isLastPage = currentPage == totalPages;
 }
-@{
-    var n = (int?)@ViewData["Page"] + 1;
-}
-<a asp-action="Index"
-   asp-route-sortOrder="@ViewData["sortOrder"]"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-   asp-route-page="@p"
-   class="btn btn-default">
-    Previous
-</a>
-<a asp-action="Index"
-   asp-route-sortOrder="@ViewData["sortOrder"]"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-   asp-route-page="@n"
-   class="btn btn-default">
-    Next
-</a>
-<table class="table">
+
+<form class="form-inline">
+    <div class="align-self-start d-flex justify-content-end" style="display: inline-block;">
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["sortOrder"]"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           asp-route-page="@prevPage"
+           class="btn btn-outline-primary @((isFirstPage) ? "disabled" : "")"
+           id="prevpg">
+            Previous
+        </a>
+        <label class="visually-hidden" for="prevpg">previous page</label>
+
+        <label class="visually-hidden" for="pagenum">page number</label>
+        <input type="text" class="form-control" name="page" id="pagenum" value="@ViewData["Page"]" style="width: 3.3rem; height: 38px; margin-bottom: 0" />
+
+        <!--<input type="text" readonly class="form-control" name="page" id="totalpgs" value="of @ViewData["TotalPages"]" style="width: 4.3rem; height: 38px; border: none; background-color: transparent;" disabled />-->
+        
+        <label class="visually-hidden" for="nxtpg">next page</label>
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["sortOrder"]"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           asp-route-page="@nextPage"
+           class="btn btn-outline-primary @((isLastPage) ? "disabled" : "")"
+           id="nxtpg">
+            Next
+        </a>
+    </div>
+</form>
+
+<table class="table table-striped">
     <thead>
-        <tr>
+        <tr class="table-secondary">
             <th>
                 <a asp-action="Index" asp-route-sortOrder="@ViewData["TitleSortParam"]">@Html.DisplayNameFor(model => model.title)</a>
             </th>
@@ -80,7 +102,7 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.title)
+                    <b><a asp-action="Details" asp-route-id="@item.Id" style="text-decoration:none">@Html.DisplayFor(modelItem => item.title)</a></b>
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.year)
@@ -125,27 +147,36 @@
                 @{var ot = item.tags.Min(t => t.date);}
                 @Html.DisplayFor(modelItem => ot)
             </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
         </tr>
 }
     </tbody>
 </table>
 
-<a asp-action="Index"
-   asp-route-sortOrder="@ViewData["sortOrder"]"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-   asp-route-page="@p"
-   class="btn btn-default">
-    Previous
-</a>
-<a asp-action="Index"
-   asp-route-sortOrder="@ViewData["sortOrder"]"
-   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-   asp-route-page="@n"
-   class="btn btn-default">
-    Next
-</a>
+<form class="form-inline">
+    <div class="align-self-start d-flex justify-content-end" style="display: inline-block;">
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["sortOrder"]"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           asp-route-page="@prevPage"
+           class="btn btn-outline-primary @((isFirstPage) ? "disabled" : "")"
+           id="prevpg">
+            Previous
+        </a>
+        <label class="visually-hidden" for="prevpg">previous page</label>
+
+        <label class="visually-hidden" for="pagenum">page number</label>
+        <input type="text" class="form-control" name="page" id="pagenum" value="@ViewData["Page"]" style="width: 3.3rem; height: 38px; margin-bottom: 0" />
+
+        <!--<input type="text" readonly class="form-control" name="page" id="totalpgs" value="of @ViewData["TotalPages"]" style="width: 4.3rem; height: 38px; border: none; background-color: transparent;" disabled />-->
+
+        <label class="visually-hidden" for="nxtpg">next page</label>
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["sortOrder"]"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           asp-route-page="@nextPage"
+           class="btn btn-outline-primary @((isLastPage) ? "disabled" : "")"
+           id="nxtpg">
+            Next
+        </a>
+    </div>
+</form>

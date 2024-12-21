@@ -31,6 +31,7 @@ namespace project.Models
                 _context.Tags.RemoveRange(_context.Tags);
                 await _context.SaveChangesAsync();
                 //*/
+                //TODO: make a clean debug way of clearing database
                 if (!_context.Movies.Any())
                 {
                     var config = new CsvConfiguration(CultureInfo.InvariantCulture)
@@ -117,7 +118,7 @@ namespace project.Models
                             movie.ratings.Append(newRating);
                             //movie.ratings = movie.ratings;
                             _context.Ratings.Add(newRating);
-                            movie.ratings = movie.ratings;//hack to update the rating list, to be removed
+                            movie.ratings = movie.ratings;//dirty hack to trigger setters, to be removed
                         }
                     }
                 }
@@ -146,11 +147,12 @@ namespace project.Models
                             movie.tags.Append(newTag);
                             //movie.tags= movie.tags;
                             _context.Tags.Add(newTag);
-                            movie.tags = movie.tags;//hack to update the tag list, to be removed
+                            movie.tags = movie.tags;//hack to trigger setters, to be removed
                         }
                     }
                 }
                 await _context.SaveChangesAsync();
+
                 /*------------------------------------------------------------*/
 
                 var rm = serviceProvider.GetRequiredService<RoleManager<IdentityRole>>();

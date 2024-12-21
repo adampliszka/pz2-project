@@ -1,4 +1,6 @@
-﻿@model project.Models.Movie
+﻿@using System.Text.Json
+@using System.Text.Json.Serialization.Metadata
+@model project.Models.Movie
 
 @{
     ViewData["Title"] = "Details";
@@ -11,21 +13,103 @@
     <h4>Movie</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.title)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.title)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.year)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.year)
         </dd>
     </dl>
 </div>
+
+<div id="chart"></div>
+
+
+<!--<script src="https://d3js.org/d3.v7.min.js"></script>-->
+<script src="@Url.Content("~/lib/d3/d3.js")"></script>
+<script>
+    @{
+
+        var r = Model.ratings;
+
+        var template = new
+        {
+            date = default(DateTime?),
+            rating_value = default(double?)
+        };
+
+        var ratings_temp = new[] { template, template };
+        var ratings_c = ratings_temp.ToList();
+        ratings_c.Clear();
+
+
+        foreach (var rating in r)
+        {
+            ratings_c.Add(new { date = rating.date, rating_value = rating.rating_value });
+
+        }
+        var final = ratings_c.OrderBy(i => i.date).ToArray();
+    }
+    var ratings = @Html.Raw(Json.Serialize(final));
+    console.log(ratings);
+
+    var dates = ratings.map(function (rating) {
+        return rating.date;
+    });
+
+    var ratingValues = ratings.map(function (rating) {
+        return rating.rating_value;
+    });
+
+    var margin = { top: 20, right: 30, bottom: 30, left: 50 },
+        width = 600 - margin.left - margin.right,
+        height = 400 - margin.top - margin.bottom;
+
+    var svg = d3.select("#chart")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+    var x = d3.scaleTime().range([0, width]);
+    var y = d3.scaleLinear().range([height, 0]);
+
+    var parseDate = d3.timeParse("%Y-%m-%dT%H:%M:%S");
+
+    x.domain(d3.extent(dates, function (d) { return parseDate(d); }));
+    y.domain([0, d3.max(ratingValues, function (d) { return d; })]);
+
+    var valueline = d3.line()
+        .x(function (d, i) { return x(parseDate(dates[i])); })
+        .y(function (d, i) { return y(ratingValues[i]); });
+
+    svg.append("path")
+        .data([ratings])
+        .attr("class", "line")
+        .attr("d", valueline)
+        .style("fill", "none")
+        .style("stroke", "steelblue");
+
+
+    svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x));
+
+    svg.append("g")
+        .call(d3.axisLeft(y));
+
+</script>
+
 <div>
     <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Delete" asp-route-id="@Model?.Id">Delete</a> |
     <a asp-action="Index">Back to List</a>
 </div>

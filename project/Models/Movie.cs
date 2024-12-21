@@ -1,4 +1,5 @@
 ﻿using Microsoft.IdentityModel.Tokens;
+using Newtonsoft.Json;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
@@ -28,6 +29,7 @@ public class Movie
                 tagMode = null;
         } 
     }
+
     List<Rating> _ratings;
     public List<Rating> ratings { 
         get => this._ratings; 
@@ -52,7 +54,7 @@ public class Movie
     public double? ratingMode { get; set; } //todo
     public double? avgRating { get; set; } //todo
     public double? medianRating { get; set; } //todo
-    public void setGenreString() //przerobić na property
+    public void setGenreString() //todo: convert to property
     {
         string s = "";
         foreach (var g in genres)
@@ -79,14 +81,22 @@ public class Movie
             this.title = title;
             }
         List<MovieGenre> gnr = new List<MovieGenre>();
-        var movieGenresList = genres.Split('|').ToList();
-        foreach(var g in movieGenresList)
+        if (genres != "(no genres listed)")
         {
-            MovieGenre mg = new MovieGenre(g, this);
-            gnr.Add(mg);
+            var movieGenresList = genres.Split('|').ToList();
+            foreach (var g in movieGenresList)
+            {
+                MovieGenre mg = new MovieGenre(g, this);
+                gnr.Add(mg);
+            }
+            
+            this.genreString = genres;
+        }
+        else
+        {
+            this.genreString = "";
         }
         this.genres = gnr;
-        this.genreString = genres;
         this.ratings = new List<Rating>();
         this.tags= new List<Tag>();
     }
@@ -119,5 +129,14 @@ public class Movie
         this.ratings = new List<Rating>();
         this.tags = new List<Tag>();
         setGenreString();
+    }
+    public List<int> getRatingsNumeric()
+    {
+        List<int> ratings = new List<int>();
+        foreach (var r in this.ratings)
+        {
+            ratings.Add((int)r.rating_value);
+        }
+        return ratings;
     }
 }

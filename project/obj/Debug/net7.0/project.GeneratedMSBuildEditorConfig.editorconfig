@@ -1,0 +1,157 @@
+is_global = true
+build_property.TargetFramework = net7.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = project
+build_property.RootNamespace = project
+build_property.ProjectDir = C:\Users\Adam\source\repos\project\project\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 7.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\Adam\source\repos\project\project
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 7.0
+build_property.EnableCodeStyleSeverity = 
+
+[C:/Users/Adam/source/repos/project/project/Areas/Identity/Pages/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcSWRlbnRpdHlcUGFnZXNcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/Home/Data.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEYXRhLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/MovieGenres/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVHZW5yZXNcQ3JlYXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/MovieGenres/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVHZW5yZXNcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/MovieGenres/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVHZW5yZXNcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/MovieGenres/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVHZW5yZXNcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/MovieGenres/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVHZW5yZXNcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/Movies/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXENyZWF0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/Movies/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXERlbGV0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/Movies/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXERldGFpbHMuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/Movies/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXEVkaXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/Movies/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVzXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/MovieUsers/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVVc2Vyc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/MovieUsers/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVVc2Vyc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/MovieUsers/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVVc2Vyc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/MovieUsers/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVVc2Vyc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/MovieUsers/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcTW92aWVVc2Vyc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/Ratings/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmF0aW5nc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/Ratings/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmF0aW5nc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/Ratings/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmF0aW5nc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/Ratings/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmF0aW5nc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/Ratings/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmF0aW5nc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/Shared/_LoginPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Mb2dpblBhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/Tags/Create.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFnc1xDcmVhdGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/Tags/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFnc1xEZWxldGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/Tags/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFnc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/Tags/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFnc1xFZGl0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/Tags/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVGFnc1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Adam/source/repos/project/project/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-t5518iznra
